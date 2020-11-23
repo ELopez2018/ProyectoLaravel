@@ -1,5 +1,23 @@
-@extends('layout/header');
+@extends('layout/header')
+
 <body class="antialiased">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">ITUS</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+              <ul class="navbar-nav mr-auto">
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <button type="button" id="logout" onclick="myFunction()" class="btn btn-outline-light my-2 my-sm-0" type="submit">Salir</button>
+              </form>
+            </div>
+          </nav>
+    </header>
+
 
         {{ csrf_field() }}
         <div class="containeralign-items-center">
@@ -14,7 +32,7 @@
                         </div>
                         <div class="card-footer">
                             <span>PRUEBA ITUS</span>
-                            <p> <a href="{{ route('principalDB.Index') }}" rel="noopener noreferrer">PAGINADO DE REGISTROS</a>  </p>
+                            <p> <a href="{{ route('principalDb.index') }}" rel="noopener noreferrer">PAGINADO DE REGISTROS</a>  </p>
                         </div>
                     </div>
                 </div>
@@ -161,6 +179,28 @@
             </style>
 
             <script type="text/javascript">
+
+                    function myFunction() {
+                        // document.getElementById("demo").innerHTML = "Hello World";
+                        Swal.fire({
+                            title: 'SALIR',
+                            text:'Está a punto de salir del sistema, ¿Está Seguro?',
+                            showDenyButton: true,
+                            // showCancelButton: true,
+                            confirmButtonText: `Si`,
+                            denyButtonText: `No`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                window.location.href="{{ route('logout')}}"
+                            } else if (result.isDenied) {
+
+                            }
+                            })
+
+                        }
+
+
             $(document).ready(function() {
                 $('#mydatatable tfoot th').each( function () {
                     var title = $(this).text();

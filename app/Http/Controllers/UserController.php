@@ -15,22 +15,56 @@ class UserController extends Controller
     {
         //
     }
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function login(Request $request) {
-        //$datos = $req->input();
-        //dd($datos);
-        //die();
-        //$param_Arr = json_decode($req->input('json', null), true);
-       //$JwtAuth = new \JwtAuth();
-        //$email = $param_Arr['email'];
-        //$password = hash('sha256', $param_Arr['password']);
-        //return response()->json($JwtAuth->signup($email, $password, null));
-        return  redirect('/principal');
+    public function login(Request $request)
+    {
+        $datos =  $request->input();
+        $JwtAuth = new \JwtAuth();
+        $email = $datos['email'];
+        $password = hash('sha256',  $datos['password']);
+        $token = $JwtAuth->signup($email, $password, null);
+        $param_Arr = $token->getData();
+        if ($param_Arr->code == '200') {
+            $repuesta = [
+                "icon" => "success",
+                "text" => "Bienvenido, Se ha logueado con éxito a la plataforma",
+                "title" => "Login Correcto",
+                "ruta" => "/principal"
+            ];
+            // $request->session()->put(['estarlin'=>'admin']);
+            session()->start();
+        } else {
+            $repuesta = [
+                "icon" => "warning",
+                "text" => "Alerta, credenciales no válidas",
+                "title" => "Login Incorrecto",
+                "ruta" => "/login"
+            ];
+        }
+        return view('/aviso', compact('repuesta'));
+        // return  redirect('/principal');
     }
+    /*
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function logout(Request $request)
+    {
+        $repuesta = [
+            "icon" => "success",
+            "text" => "Gracias [Login], su sesión con una duración de [tiempo de sesión] ha terminado. Hora de inicio: [Inicio] - Hora de fin [Fin]",
+            "title" => "Adios",
+            "ruta" => "/login"
+        ];
+        return view('/aviso', compact('repuesta'));
+        // return $request->session->all();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

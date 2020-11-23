@@ -13,8 +13,10 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [UserController::class, 'login'])->name('autorizacion');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/principal', [PrincipalController::class, 'index'])->name('principal');
+
 Route::get('/principal/consulta', [PrincipalController::class, 'consulta'])->name('principal.consulta');
 
 
