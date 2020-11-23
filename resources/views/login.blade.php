@@ -1,6 +1,6 @@
 @extends('layout/header')
 <body class="antialiased">
-    <form action="" method="POST" >
+    <form action="{{ route('autorizacion')}}" method="POST" >
         {{ csrf_field() }}
         <div class="containeralign-items-center">
             <div class="row mt-5 ">

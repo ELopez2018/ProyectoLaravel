@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
 
 class PrincipalController extends Controller
 {
@@ -13,9 +15,33 @@ class PrincipalController extends Controller
      */
     public function index()
     {
-        //
+        $data = [];
+        return view('principal', compact('data'));
     }
+    public function consulta(Request $request)
+    {
+        $resp = Http::get('https://reqres.in/api/users?page=1');
+        $datos = $resp->json();
+        $data =  $datos['data'];
+        $orden = $request->input('orden');
+        $filtro = $request->input('buscar');
+        $filtrado = '';
 
+        if ($filtro !== '' && !is_null($filtro)) {
+            foreach ($data as  $valor) {
+                if ($valor['email'] === $filtro) {
+                    $filtrado = Arr::add([$valor], null, null);
+                }
+            }
+            $data = $filtrado;
+        }
+        if ($orden == 'asc') {
+            sort($data);
+        } else {
+            rsort($data);
+        }
+        return view('principal', compact('data'));
+    }
     /**
      * Show the form for creating a new resource.
      *
