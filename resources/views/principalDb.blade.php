@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="container">
-                <form action="{{ route('principalDb.index') }}" method="POST">
+                <form action="{{ route('principalDb.query') }}" method="GET">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-8">
