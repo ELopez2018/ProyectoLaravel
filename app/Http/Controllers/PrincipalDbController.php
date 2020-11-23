@@ -61,6 +61,26 @@ class PrincipalDbController extends Controller
         return view('principaldb', compact('data'));
     }
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    // Funcion para buscar por columna
+    public function busqueda(Request $request)
+    {
+;
+        $data = $request->input();
+        // dd( $data);
+        // die();
+        $key = array_keys($data);
+        $data = User::where($key[0], 'like', '%' . $data[$key[0]] . '%')
+            ->orderBy('id', 'asc')
+            ->paginate(5);
+        return view('principaldb', compact('data'));
+    }
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

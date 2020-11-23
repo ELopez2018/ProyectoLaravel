@@ -13,9 +13,11 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::post('/login', [UserController::class, 'login'])->name('autorizacion');
+
 Route::get('/principal', [PrincipalController::class, 'index'])->name('principal');
 Route::get('/principal/consulta', [PrincipalController::class, 'consulta'])->name('principal.consulta');
 
 
 Route::get('/principaldb', [PrincipalDBController::class, 'index'])->name('principalDb.index');
 Route::get('/principaldb/query', [PrincipalDBController::class, 'query'])->name('principalDb.query');
+Route::post('/principaldb/filtro', [PrincipalDBController::class, 'busqueda'])->name('principalDb.filtro');

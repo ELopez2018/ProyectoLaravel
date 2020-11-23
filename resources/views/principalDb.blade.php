@@ -67,18 +67,30 @@
                             <tfoot>
                                 <tr>
                                     <th>
+                                        <form action="{{ route('principalDb.filtro')}}" method="POST">
                                         <input id="id" name="id" alias="alias" class="form-control" type="text" placeholder="búsqueda/filtro" />
+                                        {{ csrf_field() }}
+                                        </form>
                                     </th>
                                     <th>
+                                        <form action="{{ route('principalDb.filtro')}}" method="GET">
                                         <input id="email" name="email" class="form-control" type="text" placeholder="búsqueda/filtro" />
+                                        {{ csrf_field() }}
+                                        </form>
                                     </th>
 
                                     <th>
+                                        <form action="{{ route('principalDb.filtro')}}" method="GET">
                                         <input  id="nombre" name="name" class="form-control" type="text" placeholder="búsqueda/filtro" />
+                                        {{ csrf_field() }}
+                                        </form>
                                     </th>
 
                                     <th>
+                                        <form action="{{ route('principalDb.filtro')}}" method="GET">
                                         <input id="creacion"  name="created_at" class="form-control" type="text" placeholder="búsqueda/filtro" />
+                                        {{ csrf_field() }}
+                                        </form>
                                     </th>
                                 </tr>
                             </tfoot>
