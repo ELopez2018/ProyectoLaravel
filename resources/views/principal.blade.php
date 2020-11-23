@@ -14,7 +14,7 @@
                         </div>
                         <div class="card-footer">
                             <span>PRUEBA ITUS</span>
-                            <p> <a href="" rel="noopener noreferrer">PAGINADO DE REGISTROS</a>  </p>
+                            <p> <a href="{{ route('principalDB.Index') }}" rel="noopener noreferrer">PAGINADO DE REGISTROS</a>  </p>
                         </div>
                     </div>
                 </div>

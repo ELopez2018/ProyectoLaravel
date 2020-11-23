@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PrincipalDbController extends Controller
 {
@@ -13,7 +14,10 @@ class PrincipalDbController extends Controller
      */
     public function index()
     {
-        //
+        $data = User::where('email', '=', 'maito')
+        ->orderBy('id', 'asc')
+        ->paginate(5);
+        return view('principalDb', compact('data'));
     }
 
     /**

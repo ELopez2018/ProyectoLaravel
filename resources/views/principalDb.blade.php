@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="container">
-                <form action="{{ route('paginado.query') }}" method="POST">
+                <form action="{{ route('principalDb.index') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-sm-8">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-sm-2">
                             <button type="submit" class="btn btn-info inline">Buscar</button>
-                            <a href="{{ route('paginado.reset') }}"><button type="button"  class="btn btn-danger  inline" >Reset</button></a>
+                            <a href="{{ route('principalDb.index') }}"><button type="button"  class="btn btn-danger  inline" >Reset</button></a>
                         </div>
                     </div>
 
