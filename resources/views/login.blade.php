@@ -5,7 +5,7 @@
         <div class="containeralign-items-center">
             <div class="row mt-5 ">
                 <div class="col-sm-12 text-center d-flex justify-content-center">
-                    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 18rem;">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 35%;">
                         <div class="card-header">
                             <i class="fas fa-unlock-alt fa-2x"></i> &nbsp;&nbsp; Ingreso al Sistema
                         </div>

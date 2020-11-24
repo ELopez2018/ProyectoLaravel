@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
+
 class UserController extends Controller
 {
     /**
@@ -35,9 +37,15 @@ class UserController extends Controller
                 "title" => "Login Correcto",
                 "ruta" => "/principal"
             ];
-            // $request->session()->put(['estarlin'=>'admin']);
-            session()->start();
+            $credentials = $request->only($email ,  $datos['password']);
+            Auth::attempt($credentials);
+            session(['user' => $email]);
+            session(['iat' => time()]);
+            session(['exp' =>time() + (4 * 60 * 60)]);
+            // $data = $request->session()->all();
+            // dd($data);
         } else {
+
             $repuesta = [
                 "icon" => "warning",
                 "text" => "Alerta, credenciales no válidas",
@@ -55,8 +63,11 @@ class UserController extends Controller
     */
     public function logout(Request $request)
     {
-        $login = $request->session->user;
-        $InicioSesion =$request->session->iat;
+        $data= $request->session()->all();
+
+
+        $login = $data['user'];
+        $InicioSesion =$data['iat'];;
         $HoraInicio=  date("H:i:s",$InicioSesion);
         $Horafin = date("H:i:s", time());
 
