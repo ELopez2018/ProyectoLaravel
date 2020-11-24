@@ -23,3 +23,4 @@ Route::get('/principal/consulta', [PrincipalController::class, 'consulta'])->nam
 Route::get('/principaldb', [PrincipalDBController::class, 'index'])->name('principalDb.index');
 Route::get('/principaldb/query', [PrincipalDBController::class, 'query'])->name('principalDb.query');
 Route::post('/principaldb/filtro', [PrincipalDBController::class, 'busqueda'])->name('principalDb.filtro');
+Route::get('tiempo', [PrincipalDBController::class, 'tiempo'])->name('tiempo');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use DateTime;
 
 class PrincipalDbController extends Controller
 {
@@ -145,4 +146,25 @@ class PrincipalDbController extends Controller
     {
         //
     }
+    public function tiempo()
+    {
+
+
+
+
+        $inicio= date("H:i:s",1606221439);
+        $fin =  date("H:i:s",(1606221439 + (4 * 60 * 60)));
+        // $HoraInicio= time() - 1606221439;
+        $HoraInicio=  date("H:i:s",1606221439);
+        $Horafin = date("H:i:s", (1606221439 + (4 * 60 * 60)));
+        $interval = (new DateTime($HoraInicio))->diff(new DateTime($Horafin));
+        $hour = $interval->format("%h horas ");
+        $min = $interval->format("%i min ");
+        $sec = $interval->format("%s seg ");
+        $mensaje =["Hora Inicio " =>$HoraInicio,"Hora fin  "=>$Horafin, "tiempo " => $hour .  $min .   $sec  ];
+
+        return $mensaje;
+
+    }
+
 }

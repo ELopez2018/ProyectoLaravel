@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DateTime;
 class UserController extends Controller
 {
     /**
@@ -55,14 +55,23 @@ class UserController extends Controller
     */
     public function logout(Request $request)
     {
+        $login = $request->session->user;
+        $InicioSesion =$request->session->iat;
+        $HoraInicio=  date("H:i:s",$InicioSesion);
+        $Horafin = date("H:i:s", time());
+
+        $interval = (new DateTime($HoraInicio))->diff(new DateTime($Horafin));
+        $hour = $interval->format("%h horas ");
+        $min = $interval->format("%i min ");
+        $sec = $interval->format("%s seg ");
+        $tiempoSesion =  $hour .  $min .   $sec ;
         $repuesta = [
             "icon" => "success",
-            "text" => "Gracias [Login], su sesión con una duración de [tiempo de sesión] ha terminado. Hora de inicio: [Inicio] - Hora de fin [Fin]",
+            "text" => "Gracias ". $login .", su sesión con una duración de ". $tiempoSesion ." ha terminado. Hora de inicio: ". $HoraInicio ." - Hora de fin " . $Horafin .".",
             "title" => "Adios",
             "ruta" => "/login"
         ];
         return view('/aviso', compact('repuesta'));
-        // return $request->session->all();
     }
 
     /**
